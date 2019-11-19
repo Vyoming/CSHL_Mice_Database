@@ -1,0 +1,191 @@
+<head>
+    {% block head-meta %}
+  	<meta charset="utf-8">
+  	<!--Add keywords that describe your project between the quotation marks. This helps search engines find and index your content-->
+    <meta name="keywords" content="Mice Database">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+{% load static %}
+{% load render_table from django_tables2 %}
+    <link href="{% static 'bootstrap/css/bootstrap-theme1.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap/css/bootstrap1.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap/css/bootstrap1.min.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+    <header>
+        <div class="container clearfix">
+
+    <div class= "navbar-wrapper">
+        <div class="container">
+            <nav class = "navbar navbar-inverse navbar-fixed-top" id="navbar_whole">
+
+                    <div class = "navbar-header">
+                        <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--Below is the top-left hand side of the screen where you usually see a company/project name and a logo-->
+                        <!--The next line sends the user back to the home page-->
+                        <a class="navbar-brand" href="{%url 'pastebin_paste_list' %}">
+                            <!--Insert the file name of your brand image below after the 'img'-->
+                             <img class="img-responsive" src="https://www.cshl.edu/wp-content/uploads/2018/07/cshl_logo_alternate-RGB_KO.png" style=" width:100px; height:35px">
+                        </a>
+                    </div>
+
+                    <div id= "navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                          <!--Below is where you put the rest of the links to the pages you've created. Please reference your own models
+                           in Django.-->
+                            <li>
+                                <a href="{% url 'pastebin_paste_list' %}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'table' %}">Table</a>
+                            </li>
+
+                            <li>
+                                <a href="{% url 'create' %}">Add Entry</a>
+                            </li>
+
+                        </ul>
+                    </div>
+            </nav>
+        </div>
+    </div>
+    </div>
+    </header>
+
+<body>
+<br> <br> <br> <br>
+<div class="container-fluid">
+  <center>
+    <h1 style="font-size:65px">CSHL Hillside Mouse Database</h1>
+    <br>
+    <p style="font-size:25px">
+      We try to prevent mice from being sacrificed without a purpose
+    </p>
+    <p style="font-size:25px">
+      If you have spare mice, please add an entry for them by clicking the add entry tab above
+    </p>
+    <p style="font-size:25px">
+      Below, you can see all the entries and filter to see those that are relevant to you
+    </p>
+  </center>
+</div>
+<hr class="mt-0 mb-4">
+
+<br> <br>
+
+{% if object_list %}
+<center>
+    <h1>All entries:</h1>
+    <p>The entries are sorted by the strain of the mouse</p>
+<br>
+<div class="well">
+      <h4 style="margin-top: 0">Filter</h4>
+          <ul>
+          <div>
+            <p>Filter by age<</p>
+            <form action="{% url 'searchg_results' %}" method="get" >
+              <input name="q" type="number" placeholder="Value" min="0" max="999">
+            </form>
+          </div>
+          <br>
+
+          <p>Filter by age></p>
+          <form action="{% url 'searchl_results' %}" method="get">
+            <input name="q" type="number" placeholder="Value" min="0" max="999">
+          </form>
+
+          <p>Filter by Strain</p>
+          <form action="{% url 'search_results' %}" method="get">
+              <select name="q" type="text" placeholder="Value">
+                <option value="Black6">Black6</option>
+                <option value="Black7">Black7</option>
+                <option value="129S1/SvImJ">129S1/SvImJ</option>
+                <option value="129X1/SvJ">129X1/SvJ</option>
+                <option value="A/J">A/J</option>
+                <option value="AKR/J">AKR/J</option>
+                <option value="BALB/cByJ">BALB/cByJ</option>
+                <option value="BALB/cJ">BALB/cJ</option>
+                <option value="BTBR T+ Itpr3tf/J">BTBR T+ Itpr3tf/J</option>
+                <option value="C3H/HeJ">C3H/HeJ</option>
+                <option value="C57BL/6J">C57BL/6J</option>
+                <option value="C57BL/6NJ">C57BL/6NJ</option>
+                <option value="C57BL/10J">C57BL/10J</option>
+                <option value="CBA/J">CBA/J</option>
+                <option value="CBA/CaJ">CBA/CaJ</option>
+                <option value="DBA/1J">DBA/1J</option>
+                <option value="DBA/2J">DBA/2J</option>
+                <option value="FVB/NJ">FVB/NJ</option>
+                <option value="NOD/ShiLtJ">NOD/ShiLtJ</option>
+                <option value="SJL/J">SJL/J</option>
+                <option value="TALLYHO/JngJ">TALLYHO/JngJ</option>
+              </select>
+              <input type="submit" class="btn btn-primary">
+          </form>
+          </ul>
+          <p>If you have a mice strain that is not listed here please email vshah@cshl.edu<p>
+</div>
+<br>
+<br>
+<center>
+<table class="table table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Age (in days)</th>
+      <th scope="col">Strain</th>
+      <th scope="col">Genotype</th>
+      <th scope="col">Contact information</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for paste in object_list %}
+      <tr>
+        <td>{{ paste.Age }}</td>
+        <td>{{ paste.Strain }}</td>
+        <td>{{ paste.Genotype }}</td>
+        <td>{{ paste.Contact }}</td>
+    {% endfor %}
+  </tbody>
+</table>
+</center>
+<br>
+<br>
+<ul>
+    {% for paste in object_list %}
+      {% if forloop.first %}<div class="row">{% endif %}
+      <div class="container-fixed">
+        <div class="col-xs-3">
+          <div class="well">
+            <a href="{% url 'pastebin_paste_detail' paste.id  %}">
+                 {{ paste.Strain }}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
+</ul>
+</center>
+{% else %}
+    <h1>No recent pastes</h1>
+{% endif %}
+
+
+<br>
+<br>
+<br>
+<br>
+
+</body>
