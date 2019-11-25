@@ -8,7 +8,6 @@ from django.contrib.auth.models import AbstractUser
 class Paste(models.Model):
     CHOICES = (
         ('Black6', 'Black6'),
-        ('Black7', 'Black7'),
         ('129S1/SvImJ', '129S1/SvImJ'),
         ('129X1/SvJ', '129X1/SvJ'),
         ('A/J', 'A/J'),
