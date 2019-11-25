@@ -18,34 +18,30 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
-
     <header>
         <div class="container clearfix">
-
     <div class= "navbar-wrapper">
         <div class="container">
             <nav class = "navbar navbar-inverse navbar-fixed-top" id="navbar_whole">
-
-                    <div class = "navbar-header">
-                        <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <!--Below is the top-left hand side of the screen where you usually see a company/project name and a logo-->
-                        <!--The next line sends the user back to the home page-->
+                <div class = "navbar-header">
+                    <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--Below is the top-left hand side of the screen where you usually see a company/project name and a logo-->
+                    <!--The next line sends the user back to the home page-->
                         <a class="navbar-brand" href="{%url 'pastebin_paste_list' %}">
                             <!--Insert the file name of your brand image below after the 'img'-->
-                             <img class="img-responsive" src="https://www.cshl.edu/wp-content/uploads/2018/07/cshl_logo_alternate-RGB_KO.png" style=" width:100px; height:35px">
-                        </a>
-                    </div>
-
-                    <div id= "navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                          <!--Below is where you put the rest of the links to the pages you've created. Please reference your own models
+                            <img  src="https://www.cshl.edu/wp-content/uploads/2018/07/cshl_logo_alternate-RGB_KO.png" style=" width:50px; height:auto">
+                    </a>
+                </div>
+                <div id= "navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!--Below is where you put the rest of the links to the pages you've created. Please reference your own models
                            in Django.-->
-                            <li>
+                        <li>
                                 <a href="{% url 'pastebin_paste_list' %}">Home</a>
                             </li>
                             <li>
@@ -66,51 +62,48 @@
 
 <body>
 <br> <br> <br> <br>
-<div class="container-fluid">
-  <center>
-    <h1 style="font-size:65px">CSHL Hillside Mouse Database</h1>
-    <br>
-    <p style="font-size:25px">
-      We try to prevent mice from being sacrificed without a purpose
-    </p>
-    <p style="font-size:25px">
-      If you have spare mice, please add an entry for them by clicking the add entry tab above
-    </p>
-    <p style="font-size:25px">
-      Below, you can see all the entries and filter to see those that are relevant to you
-    </p>
-  </center>
-</div>
-<hr class="mt-0 mb-4">
-
-<br> <br>
+<div class="container">
+    <div class="col-2"></div>
+    <div class="col-10">
+        <div class="row">
+            <h1 class="display-3">CSHL Mouse Database
+            <br>
+            <small class="text-muted">If you have spare mice, please add an entry for them by clicking the add entry tab above
+            <br>
+            Below, you can see all the entries and filter to see those that are relevant to you
+            </small>
+            </h1>
+        </div>
+<hr>
 
 {% if object_list %}
-<center>
-    <h1>All entries:</h1>
-    <p>The entries are sorted by the strain of the mouse</p>
+    <div class="row">
+    <h2 class="display-4">All entries
+        <br>
+        <small class="text-muted">The entries are sorted by the strain of the mouse:
+        </small>
+    </h2>
 <br>
 <div class="well">
       <h4 style="margin-top: 0">Filter</h4>
           <ul>
           <div>
-            <p>Filter by age<</p>
+            <p>Filter by age: less than</p>
             <form action="{% url 'searchg_results' %}" method="get" >
-              <input name="q" type="number" placeholder="Value" min="0" max="999">
+              <input name="q" type="number" placeholder="age" min="0" max="999">
             </form>
           </div>
           <br>
 
-          <p>Filter by age></p>
+          <p>Filter by age: greater than</p>
           <form action="{% url 'searchl_results' %}" method="get">
-            <input name="q" type="number" placeholder="Value" min="0" max="999">
+            <input name="q" type="number" placeholder="age" min="0" max="999">
           </form>
 
           <p>Filter by Strain</p>
           <form action="{% url 'search_results' %}" method="get">
               <select name="q" type="text" placeholder="Value">
                 <option value="Black6">Black6</option>
-                <option value="Black7">Black7</option>
                 <option value="129S1/SvImJ">129S1/SvImJ</option>
                 <option value="129X1/SvJ">129X1/SvJ</option>
                 <option value="A/J">A/J</option>
@@ -136,13 +129,14 @@
           </ul>
           <p>If you have a mice strain that is not listed here please email vshah@cshl.edu<p>
 </div>
-<br>
-<br>
-<center>
+</div>
+
+<div class="row">
 <table class="table table-hover">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Age (in days)</th>
+      <th scope="col">DOB </th>
+      <th scope="col">Age (days)</th>
       <th scope="col">Strain</th>
       <th scope="col">Genotype</th>
       <th scope="col">Contact information</th>
@@ -151,6 +145,7 @@
   <tbody>
     {% for paste in object_list %}
       <tr>
+        <td>{{ paste.DOB }}</td>
         <td>{{ paste.Age }}</td>
         <td>{{ paste.Strain }}</td>
         <td>{{ paste.Genotype }}</td>
@@ -158,13 +153,11 @@
     {% endfor %}
   </tbody>
 </table>
-</center>
-<br>
-<br>
+</div>
 <ul>
     {% for paste in object_list %}
       {% if forloop.first %}<div class="row">{% endif %}
-      <div class="container-fixed">
+      <div class="container">
         <div class="col-xs-3">
           <div class="well">
             <a href="{% url 'pastebin_paste_detail' paste.id  %}">
@@ -177,15 +170,10 @@
       {% if forloop.last %}</div>{% endif %}
     {% endfor %}
 </ul>
-</center>
 {% else %}
     <h1>No recent pastes</h1>
 {% endif %}
 
-
-<br>
-<br>
-<br>
-<br>
-
+</div><!--This is the end of col-10-->
+</div><!--This is the end of container-->
 </body>
