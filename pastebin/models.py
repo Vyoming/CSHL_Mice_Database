@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from accounts.models import Activation
+from jsonfield import JSONField
 #class User(models.Model):
 #    pass
 
@@ -31,7 +32,7 @@ class Paste(models.Model):
     Age = models.IntegerField()
     Strain = models.TextField(max_length=1, choices=CHOICES)
     Genotype = models.TextField()
-    Contact = models.TextField(max_length=200)
+    Contact = JSONField("Contact Info", default = Activation.user)
     name = models.CharField(max_length=40, null=True, blank=True)
 
     created_on = models.DateTimeField(auto_now_add=True)

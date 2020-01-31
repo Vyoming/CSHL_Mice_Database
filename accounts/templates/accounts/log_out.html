@@ -1,4 +1,75 @@
+<head>
+  {% block head-meta %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="keywords" content="Mice Database">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% endblock %}
 
+{% load static %}
+
+    <link href="{% static 'bootstrap/css/bootstrap-theme1.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap/css/bootstrap1.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="{% static 'bootstrap/css/bootstrap1.min.css' %}"
+          rel="stylesheet" media="screen">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<header>
+    <div class="container clearfix">
+
+<div class= "navbar-wrapper">
+    <div class="container">
+        <nav class = "navbar navbar-inverse navbar-fixed-top" id="navbar_whole">
+
+                <div class = "navbar-header">
+                    <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--Below is the top-left hand side of the screen where you usually see a company/project name and a logo-->
+                    <!--The next line sends the user back to the home page-->
+                        <a class="navbar-brand" href="{%url 'pastebin_paste_list' %}">
+                            <!--Insert the file name of your brand image below after the 'img'-->
+                            <img  src="https://www.cshl.edu/wp-content/uploads/2018/07/cshl_logo_alternate-RGB_KO.png" style=" width:50px; height:auto">
+                    </a>
+                </div>
+
+                <div id= "navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                      <!--Below is where you put the rest of the links to the pages you've created. Please reference your own models
+                       in Django.-->
+                        <li>
+                            <a href="{% url 'pastebin_paste_list' %}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'table' %}">Table</a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'create' %}">Add Entry</a>
+                        </li>
+
+                    </ul>
+                </div>
+        </nav>
+    </div>
+</div>
+</div>
+</header>
+<body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 {% load i18n %}
 
 {% block content %}

@@ -10,6 +10,8 @@ from .filters import UserFilter
 from .forms import RegisterForm
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
+from accounts.models import Activation
+
 #create view here!!!
 class PasteCreate(CreateView):
     model = Paste
@@ -33,7 +35,8 @@ class PasteDelete(DeleteView):
 class PasteUpdate(UpdateView):
     model = Paste
     fields = ['Age','Strain','Genotype','Contact','name']
-    success_url = reverse_lazy('pastebin_paste_list')
+    if (Paste.Contact == Activation.user):
+        success_url = reverse_lazy('pastebin_paste_list')
 
 class SearchResultsView(ListView):
     model = Paste
