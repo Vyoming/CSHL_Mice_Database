@@ -30,16 +30,14 @@ class Paste(models.Model):
         ('SJL/J', 'SJL/J'),
         ('TALLYHO/JngJ', 'TALLYHO/JngJ'),
     )
-a = Activation()
-
-    def __init__(self):
-        self.Age = models.IntegerField()
-        self.Strain = models.TextField(max_length=1, choices=CHOICES)
-        self.Genotype = models.TextField()
-        self.Contact = models.ForeignKey(a.email, on_delete=models.CASCADE)
-        self.name = models.CharField(max_length=40, null=True, blank=True)
-        self.created_on = models.DateTimeField(auto_now_add=True)
-        self.updated_on = models.DateTimeField(auto_now=True)
+    a = Activation()
+    Age = models.IntegerField()
+    Strain = models.TextField(max_length=1, choices=CHOICES)
+    Genotype = models.TextField()
+    Contact = models.ForeignKey('accounts.Activation',choices= a.email, on_delete=models.CASCADE,  )
+    name = models.CharField(max_length=40, null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name or str(self.id)
