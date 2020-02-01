@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from accounts.models import Activation
-from jsonfield import JSONField
+from django.contrib.auth.models import User
+
 #class User(models.Model):
 #    pass
 
@@ -29,14 +30,16 @@ class Paste(models.Model):
         ('SJL/J', 'SJL/J'),
         ('TALLYHO/JngJ', 'TALLYHO/JngJ'),
     )
-    Age = models.IntegerField()
-    Strain = models.TextField(max_length=1, choices=CHOICES)
-    Genotype = models.TextField()
-    Contact = JSONField("Contact Info", default = Activation.user)
-    name = models.CharField(max_length=40, null=True, blank=True)
+a = Activation()
 
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    def __init__(self):
+        self.Age = models.IntegerField()
+        self.Strain = models.TextField(max_length=1, choices=CHOICES)
+        self.Genotype = models.TextField()
+        self.Contact = models.ForeignKey(a.email, on_delete=models.CASCADE)
+        self.name = models.CharField(max_length=40, null=True, blank=True)
+        self.created_on = models.DateTimeField(auto_now_add=True)
+        self.updated_on = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.name or str(self.id)
