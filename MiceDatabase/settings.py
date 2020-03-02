@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 'django_tables2',
 'widget_tweaks',
 'bootstrap4',
+'jsonfield'
 ]
 
 ALLOWED_HOSTS = []
@@ -84,8 +85,8 @@ WSGI_APPLICATION = 'MiceDatabase.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(CONTENT_DIR, 'tmp/emails')
-EMAIL_HOST_USER = 'test@example.com'
-DEFAULT_FROM_EMAIL = 'test@example.com'
+EMAIL_HOST_USER = 'vshah@cshl.edu'
+DEFAULT_FROM_EMAIL = 'vshah@cshl.edu'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -117,10 +118,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ENABLE_USER_ACTIVATION = True
 DISABLE_USERNAME = False
-LOGIN_VIA_EMAIL = True
-LOGIN_VIA_EMAIL_OR_USERNAME = False
+LOGIN_VIA_EMAIL = False
+LOGIN_VIA_EMAIL_OR_USERNAME = True
 LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000/CSHLMiceDatabase/'
-LOGIN_URL = 'accounts:log_in'
+LOGIN_URL = 'accounts:'
 USE_REMEMBER_ME = True
 
 RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False

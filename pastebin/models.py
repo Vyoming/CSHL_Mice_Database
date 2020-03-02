@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from accounts.models import Activation
 from django.contrib.auth.models import User
-
+from jsonfield import JSONField
 #class User(models.Model):
 #    pass
 
@@ -30,11 +30,17 @@ class Paste(models.Model):
         ('SJL/J', 'SJL/J'),
         ('TALLYHO/JngJ', 'TALLYHO/JngJ'),
     )
-    a = Activation()
+
+
+
     Age = models.IntegerField()
     Strain = models.TextField(max_length=1, choices=CHOICES)
     Genotype = models.TextField()
-    Contact = models.ForeignKey('accounts.Activation',choices= a.email, on_delete=models.CASCADE,  )
+    def contact_default():
+        mail = Activation.objects.get()
+        return {"email": mail.email}
+    Contact = models.EmailField("ContactInfo", default=Activation.email, blank=True)
+
     name = models.CharField(max_length=40, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
