@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from accounts.models import Activation
 from django.contrib.auth.models import User
 from jsonfield import JSONField
+from django.utils.encoding import smart_text
 #class User(models.Model):
 #    pass
 
@@ -36,10 +37,15 @@ class Paste(models.Model):
     Age = models.IntegerField()
     Strain = models.TextField(max_length=1, choices=CHOICES)
     Genotype = models.TextField()
+    x1 = Activation.email
+    defaul = smart_text(x1)
+    def __unicode__(self):
+        defaul = smart_text(self.x1)
+        return defaul
     def contact_default():
         mail = Activation.objects.get()
         return {"email": mail.email}
-    Contact = models.EmailField("ContactInfo", default=Activation.email, blank=True)
+    Contact = models.CharField(max_length=40, default=defaul, blank=True)
 
     name = models.CharField(max_length=40, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
