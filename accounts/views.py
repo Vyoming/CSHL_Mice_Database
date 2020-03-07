@@ -105,7 +105,7 @@ class SignUpView(GuestOnlyView, FormView):
 
         # Create a user record
         user.save()
-        return redirect(settings.LOGIN_REDIRECT_URL)
+        return redirect(settings.LOGIN_URL)
         # Change the username to the "user_ID" form
         if settings.DISABLE_USERNAME:
             user.username = f'user_{user.id}'

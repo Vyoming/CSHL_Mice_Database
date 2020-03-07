@@ -11,34 +11,48 @@ from .forms import RegisterForm
 from django.contrib.auth import login
 from django.contrib.auth.hashers import make_password
 from accounts.models import Activation
-
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 #create view here!!!
-class PasteCreate(CreateView):
+class PasteCreate(LoginRequiredMixin, CreateView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     fields = ['Age','Strain','Genotype','Contact','name']
     success_url = reverse_lazy('pastebin_paste_list')
 
-class PasteList(ListView):
+class PasteList(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = "pastebin/paste_list.html"
     queryset = Paste.objects.all()
     context_object_name = 'queryset'
 
-class PasteDetail(DetailView):
+class PasteDetail(LoginRequiredMixin, DetailView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = "pastebin/paste_detail.html"
 
-class PasteDelete(DeleteView):
+class PasteDelete(LoginRequiredMixin, DeleteView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     success_url = reverse_lazy('pastebin_paste_list')
 
-class PasteUpdate(UpdateView):
+class PasteUpdate(LoginRequiredMixin, UpdateView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     fields = ['Age','Strain','Genotype','Contact','name']
     if (Paste.Contact == Activation.user):
         success_url = reverse_lazy('pastebin_paste_list')
 
-class SearchResultsView(ListView):
+class SearchResultsView(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = 'search_results.html'
     def get_queryset(self): # new
@@ -48,7 +62,9 @@ class SearchResultsView(ListView):
         )
         return object_list
 
-class SearchResultView(ListView):
+class SearchResultView(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = 'search_results.html'
     def get_queryset(self): # new
@@ -58,7 +74,9 @@ class SearchResultView(ListView):
         )
         return object_list
 
-class ResultsdropView(ListView):
+class ResultsdropView(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = 'search_results.html'
     def get_queryset(self): # new
@@ -68,13 +86,17 @@ class ResultsdropView(ListView):
         )
         return object_list
 
-class Tableview(ListView):
+class Tableview(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = "pastebin/search_results.html"
     queryset = Paste.objects.all()
     context_object_name = 'queryset'
 
-class searchview(ListView):
+class searchview(LoginRequiredMixin, ListView):
+    login_url = settings.LOGIN_URL
+    redirect_field_name = 'redirect_to'
     model = Paste
     template_name = "pastebin/search_results.html"
     def search(request):

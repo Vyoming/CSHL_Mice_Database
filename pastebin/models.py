@@ -8,7 +8,12 @@ from django.utils.encoding import smart_text
 #    pass
 
 # Create your models here.
+
 class Paste(models.Model):
+    def __init__(self):
+        x1 = Activation.email
+
+
     CHOICES = (
         ('Black6', 'Black6'),
         ('129S1/SvImJ', '129S1/SvImJ'),
@@ -32,20 +37,14 @@ class Paste(models.Model):
         ('TALLYHO/JngJ', 'TALLYHO/JngJ'),
     )
 
-
-
     Age = models.IntegerField()
     Strain = models.TextField(max_length=1, choices=CHOICES)
     Genotype = models.TextField()
-    x1 = Activation.email
-    defaul = smart_text(x1)
-    def __unicode__(self):
-        defaul = smart_text(self.x1)
-        return defaul
+
     def contact_default():
         mail = Activation.objects.get()
         return {"email": mail.email}
-    Contact = models.CharField(max_length=40, default=defaul, blank=True)
+    Contact = models.CharField(max_length=40, default="xx", blank=True)
 
     name = models.CharField(max_length=40, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
