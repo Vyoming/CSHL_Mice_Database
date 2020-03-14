@@ -15,6 +15,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 #create view here!!!
+
 class PasteCreate(LoginRequiredMixin, CreateView):
     login_url = settings.LOGIN_URL
     redirect_field_name = 'redirect_to'
