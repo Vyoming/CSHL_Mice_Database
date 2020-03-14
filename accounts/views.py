@@ -323,6 +323,6 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
 class RestorePasswordDoneView(BasePasswordResetDoneView):
     template_name = 'accounts/restore_password_done.html'
 
-
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
     template_name = 'accounts/log_out.html'
+    success_url = reverse_lazy('pastebin_paste_list')
