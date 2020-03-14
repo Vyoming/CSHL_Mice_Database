@@ -4,14 +4,14 @@ from accounts.models import Activation
 from django.contrib.auth.models import User
 from jsonfield import JSONField
 from django.utils.encoding import smart_text
+import datetime
 #class User(models.Model):
 #    pass
 
 # Create your models here.
 
 class Paste(models.Model):
-    def __init__(self):
-        x1 = Activation.email
+
 
 
     CHOICES = (
@@ -36,19 +36,26 @@ class Paste(models.Model):
         ('SJL/J', 'SJL/J'),
         ('TALLYHO/JngJ', 'TALLYHO/JngJ'),
     )
+    created_on = models.DateTimeField(auto_now_add=True)
 
-    Age = models.IntegerField()
+    Age = models.TextField("When was your mice born?", null = True)
     Strain = models.TextField(max_length=1, choices=CHOICES)
     Genotype = models.TextField()
 
     def contact_default():
         mail = Activation.objects.get()
         return {"email": mail.email}
-    Contact = models.CharField(max_length=40, default="xx", blank=True)
+    Contact = models.CharField("Write your email here", max_length=40, blank=True)
 
     name = models.CharField(max_length=40, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+    #AG = Age.date
+    #CR = datetime.datetime.now()
+    #Ag = TimeDiff(Age,created_on)
+
+    #Ag = Age.second - CR.seconds
+    #num_days = Ag / 60 / 60 / 24
 
     def __unicode__(self):
         return self.name or str(self.id)
