@@ -153,12 +153,15 @@
         <td>{{ paste.Strain }}</td>
         <td>{{ paste.Genotype }}</td>
         <td>{{ paste.Contact }}</td>
+        <td><a href="{% url 'pastebin_paste_detail' paste.id  %}">
+             Click here to access entry
+        </a></td>
     {% endfor %}
   </tbody>
 </table>
 </div>
 <ul>
-    {% for paste in object_list %}
+    <!-- {% for paste in object_list %}
       {% if forloop.first %}<div class="row">{% endif %}
       <div class="container">
         <div class="col-xs-3">
@@ -171,10 +174,10 @@
       </div>
       {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
       {% if forloop.last %}</div>{% endif %}
-    {% endfor %}
+    {% endfor %} -->
 </ul>
 {% else %}
-    <h1>No recent pastes</h1>
+    <h1>No recent entires</h1>
 {% endif %}
 
 </div><!--This is the end of col-10-->
