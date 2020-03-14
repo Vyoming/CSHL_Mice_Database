@@ -53,6 +53,9 @@
                            <li>
                                <a href="{% url 'create' %}">Add Entry</a>
                            </li>
+                           <li>
+                               <a href="{% url 'accounts:log_out' %}">Log Out</a>
+                           </li>
 
                         </ul>
                     </div>
@@ -80,7 +83,7 @@
           <h1 class="mt-2">Entry Details</h1>
           <hr class="mt-0 mb-4">
 {% load crispy_forms_tags %}
-{% if messages %}
+ <!-- {% if messages %}
     <div class="messages">
     <ul>
     {% for message in messages %}
@@ -90,7 +93,7 @@
         {% endfor %}
     </ul>
     </div>
-{% endif %}
+{% endif %}-->
 
 
 <p>
@@ -99,7 +102,7 @@
         <label>Name</label>
     </div>
     <div>
-        <span>{{ if object.name }}</span>
+        <span>{{object.name }}</span>
     </div>
     <div>
     </div>
@@ -107,7 +110,7 @@
       <label>Age(days)</label>
     </div>
     <div>
-        <textarea rows="2" cols="50" OnClick="this.select();" readonly="true">{{ object.Age }}</textarea>
+        <textarea rows="2" cols="50" OnClick="this.select();" readonly="true">{{ object.num_days }}</textarea>
     </div>
     <div>
         <label>Strain</label>

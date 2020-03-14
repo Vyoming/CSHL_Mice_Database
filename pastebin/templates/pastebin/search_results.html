@@ -54,6 +54,9 @@
                             <li>
                                 <a href="{% url 'create' %}">Add Entry</a>
                             </li>
+                            <li>
+                                <a href="{% url 'accounts:log_out' %}">Log Out</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -80,7 +83,7 @@
     <tbody>
       {% for paste in object_list %}
         <tr>
-          <td>{{ paste.Age }}</td>
+          <td>{{ paste.num_days }}</td>
           <td>{{ paste.Strain }}</td>
           <td>{{ paste.Genotype }}</td>
           <td>{{ paste.Contact }}</td>
