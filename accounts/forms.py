@@ -121,7 +121,10 @@ class SignUpForm(UserCreationForm):
         if user:
             raise ValidationError(_('You can not use this email address.'))
 
+        if "@cshl.edu" not in email :
+            raise forms.ValidationError("Must be a CSHL email address")
         return email
+
 
 
 class ResendActivationCodeForm(UserCacheMixin, forms.Form):
