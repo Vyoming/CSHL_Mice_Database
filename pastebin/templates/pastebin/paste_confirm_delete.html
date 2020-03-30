@@ -73,7 +73,7 @@ your static files then delete the 'block head-css below'-->
 <br>
 <br>
 <center>
-<h1>Really delete paste {{ object }}?</h1>
+<h1>Do you really want to delete this entry?</h1>
 <h2>This action cannot be undone</h2>
 <form action="{% url 'pastebin_paste_delete' object.id %}" method="POST">
     {% csrf_token %}
